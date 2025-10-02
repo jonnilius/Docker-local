@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 # override default php-fpm www.conf with our local version
 # to fetch the default www.conf from the container run
@@ -18,11 +18,11 @@ ADD ./php.ini-development /usr/local/etc/php/php.ini
 # installed since other extensions are present
 # you can verify the installed extensions beforehand using
 # docker run -it --rm php:7.4-fpm-alpine php -m
-RUN apk add --no-cache freetds \
-    freetds-dev \
-    && docker-php-ext-install bcmath \
-    pdo_mysql \
-    pdo_dblib
+RUN apk add --no-cache \
+      libsybdb \
+      libsybdb-dev \
+  && docker-php-ext-install bcmath pdo_mysql pdo_dblib
+
 
 # create the /var/www/html directory, -p for creating the parent
 # directories if they're not present
