@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine3.18
+FROM php:8.2-fpm
 
 # override default php-fpm www.conf with our local version
 # to fetch the default www.conf from the container run
@@ -19,9 +19,10 @@ ADD ./php.ini-development /usr/local/etc/php/php.ini
 # you can verify the installed extensions beforehand using
 # docker run -it --rm php:7.4-fpm-alpine php -m
 
-RUN apk add --no-cache \
-      freetds-libs \
+RUN apt-get update && apt-get install -y \
+      freetds-bin \
       freetds-dev \
+      unixodbc-dev \
   && docker-php-ext-install bcmath pdo_mysql pdo_dblib
 
 
