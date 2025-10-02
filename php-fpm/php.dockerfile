@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# override default php-fpm www.conf with our local version
+# Aktualisiere php-fpm mit der lokalen Version
 # to fetch the default www.conf from the container run
 # docker run --rm php:7.4-fpm-alpine cat /usr/local/etc/php-fpm.d/www.conf > www.conf
 ADD ./www.conf /usr/local/etc/php-fpm.d/www.conf
